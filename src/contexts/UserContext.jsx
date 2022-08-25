@@ -32,16 +32,20 @@ export default function UserProvider({ children }) {
   }, [updatedUserProducts, userID]);
 
   const getAllUserProducts = () => {
-    axios.get('/product/all/' + userID).then((response) => {
-      setInjectAddedProduct(response.data);
-    });
+    axios
+      .get('https://backend-pra.herokuapp.com/product/all/' + userID)
+      .then((response) => {
+        setInjectAddedProduct(response.data);
+      });
   };
   // ### ADD PRODUCT ###
   const addProductHandler = () => {
     setUpdatedUserProducts(false);
-    axios.get('/product/add/' + userID).then((response) => {
-      setUpdatedUserProducts(true);
-    });
+    axios
+      .get('https://backend-pra.herokuapp.com/product/add/' + userID)
+      .then((response) => {
+        setUpdatedUserProducts(true);
+      });
   };
   // ### ADD CUSTOMIZED PRODUCT ###
   const addCustomizedProductHandler = () => {
@@ -52,20 +56,27 @@ export default function UserProvider({ children }) {
       price,
       quantity,
     };
-    axios.post('/product/add/customized/' + userID, data).then((response) => {
-      setUpdatedUserProducts(true);
-    });
+    axios
+      .post(
+        'https://backend-pra.herokuapp.com/product/add/customized/' + userID,
+        data
+      )
+      .then((response) => {
+        setUpdatedUserProducts(true);
+      });
   };
   // ### LOGIN CHECK ###
   const loginCheck = (e) => {
     e.preventDefault();
     const data = { email, password };
-    axios.post('/user/login', data).then((response) => {
-      setMessage(response.data.message);
-      setUserID(response.data.user._id);
-      setIsUserLoggedIn(true);
-      navigate('../products/user');
-    });
+    axios
+      .post('https://backend-pra.herokuapp.com/user/login', data)
+      .then((response) => {
+        setMessage(response.data.message);
+        setUserID(response.data.user._id);
+        setIsUserLoggedIn(true);
+        navigate('../products/user');
+      });
   };
   const logOutHandler = () => {
     setIsUserLoggedIn(false);
