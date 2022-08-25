@@ -4,7 +4,7 @@ function ProductList() {
     const [products, setProducts] = useState([])
 
     useEffect( () => {
-        fetch("/product/all")
+        fetch("https://backend-pra.herokuapp.com/product/all")
         .then( (res) => res.json())
         .then( (products) => {
             setProducts(products);
