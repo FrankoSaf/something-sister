@@ -1,77 +1,77 @@
-import {useState} from "react";
-import axios from "axios";
+import { useState } from 'react';
+import axios from 'axios';
 
-import { SignUpContainer } from "./sign-up-form.styles"
+import { SignUpContainer } from './sign-up-form.styles';
 
 function SignUpForm() {
-    const [message, setMessage] = useState()
-    const [username, setUsername] = useState()
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+  const [message, setMessage] = useState();
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
 
-    const sendToBackend = () => {
-        console.log(username, email, password)
-        const data = {username, email, password}
-        
-        axios
-            .post("/user/create", data) // .post(URL, dataToSend)
-            .then(response => {
-                console.log(response.data)
-                setMessage(response.data)
-            }) // response from backend
-    }
+  const sendToBackend = () => {
+    console.log(username, email, password);
+    const data = { username, email, password };
 
-    return (
-            <SignUpContainer>
-                <h2>Don't have an account?</h2>
-                <span>Sign up here:</span>
+    axios
+      .post('https://backend-pra.herokuapp.com/user/create', data) // .post(URL, dataToSend)
+      .then((response) => {
+        console.log(response.data);
+        setMessage(response.data);
+      }); // response from backend
+  };
 
-                <br/>
-                
-                <form action="" id="sing-up-form">
-                    
-                    <label for="text">Username:  </label>
-                    <input 
-                        type="text" 
-                        id="text" 
-                        name="username" 
-                        placeholder="Enter username" 
-                        onChange={e => setUsername(e.target.value)
-                    }/>
-                    <br/>
+  return (
+    <SignUpContainer>
+      <h2>Don't have an account?</h2>
+      <span>Sign up here:</span>
 
-                    <label for="email">E-Mail:  </label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="Enter email" 
-                        onChange={e => setEmail(e.target.value)
-                    }/>
-                    <br/>
+      <br />
 
-                    <label for="password">Password:  </label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="Enter password" 
-                        onChange={e => setPassword(e.target.value)
-                    }/>
-                    <br/>
-                </form>
+      <form action='' id='sing-up-form'>
+        <label for='text'>Username: </label>
+        <input
+          type='text'
+          id='text'
+          name='username'
+          placeholder='Enter username'
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <br />
 
-                <button 
-                    type="submit" 
-                    form="sing-up-form"
-                    value="Submit"
-                    onClick={sendToBackend}
-                >SIGN UP</button>
+        <label for='email'>E-Mail: </label>
+        <input
+          type='email'
+          id='email'
+          name='email'
+          placeholder='Enter email'
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <br />
 
-                <h4 style={{color:"red"}}>{message}</h4>
+        <label for='password'>Password: </label>
+        <input
+          type='password'
+          id='password'
+          name='password'
+          placeholder='Enter password'
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <br />
+      </form>
 
-   </SignUpContainer>
-    )
+      <button
+        type='submit'
+        form='sing-up-form'
+        value='Submit'
+        onClick={sendToBackend}
+      >
+        SIGN UP
+      </button>
+
+      <h4 style={{ color: 'red' }}>{message}</h4>
+    </SignUpContainer>
+  );
 }
 
 export default SignUpForm;
